@@ -14,5 +14,18 @@
 */
 
 $router->get('/', function () use ($router) {
+    echo "<center> Welcome </center>";
+});
+
+$router->get('/version', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'auth'],
+    function () use ($router) {
+        $router->post('login', 'AuthController@login');
+        $router->post('logout', 'AuthController@logout');
+        $router->post('refresh', 'AuthController@refresh');
+        $router->get('user-profile', 'AuthController@me');
+    }
+);

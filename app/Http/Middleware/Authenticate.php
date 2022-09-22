@@ -39,6 +39,10 @@ class Authenticate
             return response('Unauthorized.', 401);
         }
 
+        if(!auth()->user()->is_admin){
+            return response('Forbidden Gateaway', 403);
+        }
+
         return $next($request);
     }
 }
